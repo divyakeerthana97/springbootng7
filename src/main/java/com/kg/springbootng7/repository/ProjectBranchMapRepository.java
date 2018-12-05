@@ -1,0 +1,20 @@
+package com.kg.springbootng7.repository;
+
+import java.util.List;
+import java.util.Objects;
+
+import com.kg.springbootng7.entity.ProjectBranchMap;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+public interface ProjectBranchMapRepository extends JpaRepository<ProjectBranchMap, Long> {
+
+    @Query(
+  value = "SELECT projectbranchmap.projectbranchid,projectbranchmap.dburl,projectbranchmap.giturl,projectbranchmap.serverurl, projectname, branchname FROM project JOIN projectbranchmap ON project.projectid=projectbranchmap.projectid JOIN branch ON projectbranchmap.branchid=branch.branchid", 
+  nativeQuery = true)
+    Object[] findAllProjectBranches();
+
+
+
+}
